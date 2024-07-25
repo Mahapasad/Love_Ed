@@ -1,4 +1,3 @@
-// src/components/SignOut.js
 import React from 'react';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
@@ -17,7 +16,7 @@ const SignOut = () => {
   return (
     <button
       onClick={handleSignOut}
-      className="bg-pink-600 text-white py-2 px-4 rounded"
+      className="bg-pink-600 text-white py-3 px-6 rounded-lg shadow-md"
     >
       Sign Out
     </button>

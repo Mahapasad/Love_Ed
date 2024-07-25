@@ -1,12 +1,19 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Card = ({ title, description, link }) => {
   return (
-    <div className="card bg-white shadow-lg rounded-lg p-4 m-4 w-60 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-      <h3 className="text-pink-600 text-xl font-bold mb-2">{title}</h3>
+    <motion.div
+      className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+      whileHover={{ scale: 1.05 }}
+    >
+      <h2 className="text-2xl font-bold text-pink-600 mb-4">{title}</h2>
       <p className="text-gray-700 mb-4">{description}</p>
-      <a href={link} className="text-pink-600 underline">Read more</a>
-    </div>
+      <Link to={link} className="text-pink-600 font-bold underline">
+        Learn More
+      </Link>
+    </motion.div>
   );
 };
 

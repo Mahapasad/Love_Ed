@@ -1,10 +1,18 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
-    <footer className="bg-pink-600 text-white p-4 text-center shadow-md">
-      <p>&copy; 2024 LoveEd. All rights reserved.</p>
-    </footer>
+    <motion.footer
+      className="bg-pink-600 p-4 text-white mt-auto"
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="container mx-auto text-center">
+        &copy; 2024 Sex Education Hub. All rights reserved.
+      </div>
+    </motion.footer>
   );
 };
 

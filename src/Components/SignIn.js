@@ -1,4 +1,3 @@
-// src/components/SignIn.js
 import React, { useState } from 'react';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -20,26 +19,28 @@ const SignIn = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
-      <h2 className="text-3xl font-bold mb-6 text-pink-600">Sign In</h2>
-      <form onSubmit={handleSignIn} className="bg-white p-6 rounded shadow-md w-80">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border border-gray-300 p-2 mb-4 w-full"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border border-gray-300 p-2 mb-4 w-full"
-        />
-        <button type="submit" className="bg-pink-600 text-white py-2 w-full rounded">
-          Sign In
-        </button>
-      </form>
+      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h2 className="text-3xl font-bold mb-6 text-pink-600 text-center">Sign In</h2>
+        <form onSubmit={handleSignIn} className="space-y-6">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="border border-gray-300 p-3 rounded w-full"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border border-gray-300 p-3 rounded w-full"
+          />
+          <button type="submit" className="bg-pink-600 text-white py-3 rounded w-full">
+            Sign In
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

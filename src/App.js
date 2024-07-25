@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import Articles from './Pages/Articles';
 import SignUp from './Components/SignUp';
 import SignIn from './Components/SignIn';
+import './index.css';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Routes>
@@ -13,10 +14,9 @@ function App() {
         <Route path="/articles" element={<Articles />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        {/* Add more routes as needed */}
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
