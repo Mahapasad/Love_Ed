@@ -1,46 +1,54 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert('User signed in successfully!');
+      // Redirect to home
+      navigate('/');
     } catch (error) {
-      console.error('Error signing in:', error);
-      alert('Error signing in: ' + error.message);
+      setError(error.message);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-3xl font-bold mb-6 text-pink-600 text-center">Sign In</h2>
-        <form onSubmit={handleSignIn} className="space-y-6">
+      <h1 className="text-3xl font-bold text-pink-600 mb-4">Sign In</h1>
+      <form onSubmit={handleSignIn} className="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-gray-700">Email</label>
           <input
             type="email"
-            placeholder="Email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border border-gray-300 p-3 rounded w-full"
+            className="w-full p-2 border border-gray-300 rounded mt-1"
+            required
           />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="password" className="block text-gray-700">Password</label>
           <input
             type="password"
-            placeholder="Password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border border-gray-300 p-3 rounded w-full"
+            className="w-full p-2 border border-gray-300 rounded mt-1"
+            required
           />
-          <button type="submit" className="bg-pink-600 text-white py-3 rounded w-full">
-            Sign In
-          </button>
-        </form>
-      </div>
+        </div>
+        {error && <p className="text-red-600">{error}</p>}
+        <button type="submit" className="bg-pink-600 text-white px-4 py-2 rounded mt-4">Sign In</button>
+      </form>
     </div>
   );
 };

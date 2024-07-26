@@ -9,39 +9,68 @@ const Home = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow p-8">
-        <motion.section
-          className="text-center mb-8"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
+        <section className="text-center mb-8">
           <h2 className="text-3xl text-pink-600 font-bold mb-4">Welcome to LoveEd</h2>
-          <p className="text-gray-700">
-            Your one-stop solution for all sexual queries and exploring things you may never know.
-          </p>
-        </motion.section>
-        <motion.section
-          className="cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <Card 
-            title="Educational Articles"
-            description="Explore our collection of well-researched articles on various sex education topics."
-            link="/articles"
-          />
-          <Card 
-            title="FAQs"
-            description="Get answers to frequently asked questions about sex and relationships."
-            link="/faq"
-          />
-          <Card 
-            title="Expert Advice"
-            description="Submit your queries and get answers from certified sex educators."
-            link="/contact"
-          />
-        </motion.section>
+          <p className="text-gray-700">Your one-stop solution for all sexual queries and exploring things you may never know.</p>
+        </section>
+        <section className="cards-container">
+          <motion.div 
+            className="card-wrapper"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.2)",
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Card 
+              title="Educational Articles"
+              description="Explore our collection of well-researched articles on various sex education topics."
+              link="/articles"
+            />
+          </motion.div>
+          <motion.div 
+            className="card-wrapper"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.2)",
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Card 
+              title="FAQs"
+              description="Get answers to frequently asked questions about sex and relationships."
+              link="/faq"
+            />
+          </motion.div>
+          <motion.div 
+            className="card-wrapper"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.2)",
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Card 
+              title="Expert Advice"
+              description="Submit your queries and get answers from certified sex educators."
+              link="/contact"
+            />
+          </motion.div>
+          <motion.div 
+            className="card-wrapper"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.2)",
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Card 
+              title="Pad Selector"
+              description="Find the right type and size of pad for your needs."
+              link="/pad-selector"
+            />
+          </motion.div>
+        </section>
       </main>
       <Footer />
     </div>

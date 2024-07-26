@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../firebase';
 import { setDoc, doc } from 'firebase/firestore';
@@ -8,6 +9,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -17,9 +19,12 @@ const SignUp = () => {
       
       // Store username in Firestore
       await setDoc(doc(db, 'users', user.uid), { username });
+      console.log('User document created in Firestore:', user.uid, username);
 
-      // Redirect to home or show a success message
+      // Redirect to home
+      navigate('/');
     } catch (error) {
+      console.error('Error during sign-up:', error);
       setError(error.message);
     }
   };
