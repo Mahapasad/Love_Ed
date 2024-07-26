@@ -1,46 +1,69 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../firebase';
+import { setDoc, doc } from 'firebase/firestore';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert('User registered successfully!');
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      // Store username in Firestore
+      await setDoc(doc(db, 'users', user.uid), { username });
+
+      // Redirect to home or show a success message
     } catch (error) {
-      console.error('Error signing up:', error);
-      alert('Error signing up: ' + error.message);
+      setError(error.message);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-3xl font-bold mb-6 text-pink-600 text-center">Sign Up</h2>
-        <form onSubmit={handleSignUp} className="space-y-6">
+      <h1 className="text-3xl font-bold text-pink-600 mb-4">Sign Up</h1>
+      <form onSubmit={handleSignUp} className="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <div className="mb-4">
+          <label htmlFor="username" className="block text-gray-700">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mt-1"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-gray-700">Email</label>
           <input
             type="email"
-            placeholder="Email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border border-gray-300 p-3 rounded w-full"
+            className="w-full p-2 border border-gray-300 rounded mt-1"
+            required
           />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="password" className="block text-gray-700">Password</label>
           <input
             type="password"
-            placeholder="Password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border border-gray-300 p-3 rounded w-full"
+            className="w-full p-2 border border-gray-300 rounded mt-1"
+            required
           />
-          <button type="submit" className="bg-pink-600 text-white py-3 rounded w-full">
-            Sign Up
-          </button>
-        </form>
-      </div>
+        </div>
+        {error && <p className="text-red-600">{error}</p>}
+        <button type="submit" className="bg-pink-600 text-white px-4 py-2 rounded mt-4">Sign Up</button>
+      </form>
     </div>
   );
 };
